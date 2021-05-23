@@ -11,5 +11,4 @@ MODULES=(panel_sitronix_st7703)
 Add the `osk-sdl` hook:
 ```
 HOOKS=(base udev autodetect modconf block filesystems keyboard osk-sdl fsck bootsplash-manjaro)
-
-
+```

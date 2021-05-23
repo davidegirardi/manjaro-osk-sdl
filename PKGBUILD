@@ -10,7 +10,7 @@ pkgdesc="Onscreen keyboard for unlocking LUKS devices"
 url="https://gitlab.com/postmarketOS/osk-sdl"
 arch=('aarch64')
 license=("GPL-3.0-or-later")
-depends=('cryptsetup' 'mesa' 'ttf-dejavu')
+depends=('cryptsetup' 'mesa' 'noto-fonts')
 makedepends=('cryptsetup' 'linux-headers' 'meson' 'scdoc' 'sdl2' 'sdl2_ttf')
 source=(
     "https://gitlab.com/postmarketOS/osk-sdl/-/archive/$pkgver/osk-sdl-$pkgver.tar.gz"

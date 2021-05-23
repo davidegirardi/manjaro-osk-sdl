@@ -1,0 +1,29 @@
+#!/usr/bin/ash
+
+run_hook() {
+    # Arch and Manjaro use different methods to identify the root partition in
+    # u-boot. This make the hook compatible with both distros
+    if [ "$root" != "${root#PARTUUID=}" ]
+    then
+        root_part=$(realpath "/dev/disk/by-partuuid/${root#PARTUUID=}")
+    fi
+    if cryptsetup isLuks "$root_part"; then
+        echo "Device $root_part is encrypted, starting osk-sdl."
+        counter=0
+        until cryptsetup status cryptroot | grep -qwi active; do
+            osk-sdl -G -d "$root_part" -n cryptroot -c /etc/osk.conf
+            let "counter=counter+1"
+            if [ "$counter" -ge "5" ]
+            then
+                echo "Cannot unlock the device after 5 tries"
+                echo "Dropping into an emergency shell..."
+                return 1
+            fi
+        done
+        export root="/dev/mapper/cryptroot"
+    else
+        echo "Device $root_part is not encrypted, quitting."
+        return 1
+    fi
+}
+

@@ -10,7 +10,7 @@ pkgdesc="Onscreen keyboard for unlocking LUKS devices"
 url="https://gitlab.com/postmarketOS/osk-sdl"
 arch=('aarch64')
 license=("GPL-3.0-or-later")
-depends=('cryptsetup' 'mesa' 'noto-fonts')
+depends=('cryptsetup' 'mesa' 'ttf-dejavu')
 makedepends=('cryptsetup' 'meson' 'scdoc' 'sdl2' 'sdl2_ttf')
 source=(
     "https://gitlab.com/postmarketOS/osk-sdl/-/archive/$pkgver/osk-sdl-$pkgver.tar.gz"
@@ -22,7 +22,7 @@ options=(!strip)
 prepare() {
     mkdir -p build
     #fix font in config
-    sed -i s@'/usr/share/fonts/ttf-dejavu/DejaVuSans.ttf'@'/usr/share/fonts/noto/NotoSans-Regular.ttf'@g ${srcdir}/${pkgname}-${pkgver}/osk.conf
+    sed -i s@'/usr/share/fonts/ttf-dejavu/DejaVuSans.ttf'@'/usr/share/fonts/TTF/DejaVuSans.ttf'@g ${srcdir}/${pkgname}-${pkgver}/osk.conf
 }
 
 build() {
